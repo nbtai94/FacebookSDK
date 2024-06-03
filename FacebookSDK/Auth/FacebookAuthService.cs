@@ -6,20 +6,18 @@
         private readonly string _appSecret;
         private readonly string _redirectUri;
         private readonly string _appVersion;
-        private readonly List<string> _scopes;
-        public FacebookAuthService(string appId, string appSecret, string redirectUri, string appVersion, List<string> scopes)
+
+        public FacebookAuthService(string appId, string appSecret, string appVersion, string redirectUri)
         {
             _appId = appId;
             _appSecret = appSecret;
-            _redirectUri = redirectUri;
             _appVersion = appVersion;
-            _scopes = scopes;
-
+            _redirectUri = redirectUri;
         }
 
         public string GetLoginUrl()
         {
-            return $"https://www.facebook.com/${_appVersion}/dialog/oauth?client_id={_appId}&redirect_uri={_redirectUri}&scope={_scopes}";
+            return $"https://www.facebook.com/dialog/oauth?client_id={_appId}&redirect_uri={_redirectUri}&scope=email";
         }
 
         public async Task<string> GetAccessTokenAsync(string code)
